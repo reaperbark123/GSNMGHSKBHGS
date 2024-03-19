@@ -1,7 +1,8 @@
 if ExecutedAlready then
-    warn("[Reaper's Hub]: has already executed.")
+    -- warn("[Reaper's Hub]: has already executed.")
     return
 end
+
 getgenv().ExecutedAlready = true;
 
 local Id = game.GameId;
