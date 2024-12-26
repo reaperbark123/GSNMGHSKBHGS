@@ -1,0 +1,38 @@
+local Presents = workspace.PresentHolder
+
+local Esp = {}
+
+function Esp:Add(Object)
+    local New = Instance.new("BillboardGui", Object)
+    New.Size = UDim2.new(0, 100, 0, 100)
+    New.AlwaysOnTop = true
+    local Text = Instance.new("TextLabel", New)
+    Text.Text = "PRESENT"
+    Text.Size = UDim2.new(1, 0, 1, 0)
+    Text.TextColor3 = Color3.fromRGB(255, 255, 255)
+    Text.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+    Text.TextStrokeTransparency = 0
+    Text.BackgroundTransparency = 1
+    Text.TextSize = 30
+    Text.FontFace.Weight = Enum.FontWeight.Bold
+    Esp[Object] = New
+end
+
+function Esp:Remove(Object)
+    if Esp[Object] then
+        Esp[Object]:Destroy()
+        Esp[Object] = nil
+    end
+end
+
+for _,v in Presents:GetChildren() do
+    Esp:Add(v)
+end
+
+Presents.ChildAdded:Connect(function(v)
+    Esp:Add(v)
+end)
+
+Presents.ChildRemoved:Connect(function(v)
+    Esp:Remove(v)
+end)
